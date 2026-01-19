@@ -1,35 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { createContext, useContext, useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+// 1. データの「箱」を作る
+const ThemeContext = createContext();
+
+export default function App() {
+  // テーマの状態（light または dark）
+  const [theme, setTheme] = useState("light");
+
+  // テーマを切り替える関数
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
+  const containerStyle = {
+    backgroundColor: theme === "light" ? "#ffffff" : "#222222",
+    color: theme === "light" ? "#000000" : "#ffffff",
+    height: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    transition: "all 0.3s" // じわっと色が変わる
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    // 2. Providerで包んで、themeと関数を「バケツ」に入れる
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <div style={containerStyle}>
+        <h1>Vite + React + useContext</h1>
+        <Card />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </ThemeContext.Provider>
+  );
 }
 
-export default App
+// 子コンポーネント（Propsで何も受け取っていないことに注目！）
+function Card() {
+  return (
+    <div style={{ border: "1px solid gray", padding: "20px", borderRadius: "8px" }}>
+      <p>ここは子コンポーネントの中です</p>
+      <ThemeButton />
+    </div>
+  );
+}
+
+// 孫コンポーネント（ここでデータを取り出す）
+function ThemeButton() {
+  // 3. useContextを使って、一番上のAppからデータを取り出す
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  return (
+    <button onClick={toggleTheme} style={{ cursor: "pointer", padding: "10px 20px" }}>
+      {theme === "light" ? "ダークモードへ" : "ライトモードへ"}
+    </button>
+  );
+}
