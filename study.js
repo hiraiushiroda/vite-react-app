@@ -38,3 +38,25 @@ chiikawaFamily.push({ name: "ラッコ", type: "ラッコ", level: 20 });
 
 //追加されたか確認する
 console.log(chiikawaFamily.length);
+//================================================
+//配列　復習
+//配列の基本
+let fruits = ['apple','banana','cherry'];
+console.log(fruits[0]);//'apple'
+//連想配列の基本
+let person = {
+    name: 'Baapro',
+    age: 60,
+    isStudent: false
+};
+console.log(person.name);//'Baapro'
+//===================================
+//要素へのアクセス(Baapro参照)
+//配列で作成
+const arr = [1,2,3,4,5];
+//最初の要素(インデックス0)にアクセス
+const firstElement = arr[0];
+console.log(firstElement);//1
+//わざと存在しない要素を指定
+const outOfRangeElement = arr[10];
+console.log(outOfRangeElement);//undefined
