@@ -66,18 +66,22 @@ console.log(outOfRangeElement);//undefined
 const arr1 = [1,2,3];
 arr1.push(4);
 console.log(arr1);//[1,2,3,4]
+
 //unshiftメソッド
 const arr2 = [1,2,3];
 arr2.unshift(0);
 console.log(arr2);//[0,1,2,3]
+
 //popメソッド
 const arr3 = [1,2,3,4];
 arr3.pop();
 console.log(arr3);//[1,2,3]
+
 //shiftメソッド
 const arr4 = [1,2,3,4]
 arr4.shift();
 console.log(arr4);//[2,3,4]
+
 //spliceメソッド
 const arr5 = [1,2,4,5];
 arr5.splice(2,0,3); //インデックス2の位置に要素3を追加
@@ -107,3 +111,13 @@ const a = [1, 2];
 const b = [3, 4];
 const c = a.concat(b); //aとbをくっつけて、新しい箱（c）に入れる
 console.log(c); // [1, 2, 3, 4]
+
+//=====================================================
+//配列の繰り返し処理(1/19)
+//forループ
+const items = [1,2,3,4,5];
+
+for(let i = 0;i < items.length;i++){
+    console.log(items[i]); //配列の各要素を順番に出力
+}
+//1/19終了
