@@ -51,7 +51,7 @@ let person = {
 };
 console.log(person.name);//'Baapro'
 //===================================
-//要素へのアクセス(Baapro参照)
+//要素へのアクセス(Baapro参照)1/19
 //配列で作成
 const arr = [1,2,3,4,5];
 //最初の要素(インデックス0)にアクセス
@@ -60,3 +60,50 @@ console.log(firstElement);//1
 //わざと存在しない要素を指定
 const outOfRangeElement = arr[10];
 console.log(outOfRangeElement);//undefined
+//=========================================
+//配列の要素の追加・削除
+//pushメソッド
+const arr1 = [1,2,3];
+arr1.push(4);
+console.log(arr1);//[1,2,3,4]
+//unshiftメソッド
+const arr2 = [1,2,3];
+arr2.unshift(0);
+console.log(arr2);//[0,1,2,3]
+//popメソッド
+const arr3 = [1,2,3,4];
+arr3.pop();
+console.log(arr3);//[1,2,3]
+//shiftメソッド
+const arr4 = [1,2,3,4]
+arr4.shift();
+console.log(arr4);//[2,3,4]
+//spliceメソッド
+const arr5 = [1,2,4,5];
+arr5.splice(2,0,3); //インデックス2の位置に要素3を追加
+console.log(arr5); //[1,2,3,4,5]
+
+arr5.splice(1,2,6,7); //インデックス1から2要素を削除し、要素6,7を追加
+console.log(arr5); //[1、6、7、4、5]
+//============================================
+//配列の反転、並び替え、結合(1/19)
+//配列の反転　reverse
+const arr6 = [1,2,3,4,5];
+arr6.reverse();
+console.log(arr6);//[5,4,3,2,1]
+
+//配列の並び替え(昇順)　sort
+const arr7 = [5,3,1,4,2];
+arr7.sort();
+console.log(arr7);//[1,2,3,4,5]
+
+//配列の並び替え(降順)　sort((a,b) => b - a)
+const arr8 = [5,3,1,4,2];
+arr8.sort((a,b) => b - a);
+console.log(arr8); //[5,4,3,2,1]
+
+//配列の統合　concat
+const a = [1, 2];
+const b = [3, 4];
+const c = a.concat(b); //aとbをくっつけて、新しい箱（c）に入れる
+console.log(c); // [1, 2, 3, 4]
