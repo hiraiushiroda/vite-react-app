@@ -157,4 +157,35 @@ const sum = items.reduce((accumulator,value) => accumulator + value,0);
 console.log(sum); //15
 //全員を合わせて一つにする（まとめるという意味）
 //accumulator: 合計を入れる箱
+//0:初期値　accumulatorに最初に入れる数字
 
+//===========================================================
+//配列の検索とフィルタリング(1/20)
+
+//indexOf()メソッド　指定した要素が何番目にあるかを探す
+//見つからない場合は-1 ←その項目がリストにあるかチェックできる
+//オブジェクトが入った複雑な配列を探すのには不向き
+const arr_indexOf = [1,2,3,4,5]
+const index = arr_indexOf.indexOf(3);
+console.log(index); //2
+
+//findメソッド　条件に合う最初の値を一つだけ取り出す
+//Reactでの用途：詳細画面を表示する時（沢山のリストの中からデータを1つ）
+//一致する要素がない時はundefined
+const arr_find = [1,2,3,4,5];
+const found = arr_find.find(value => value > 3);
+console.log(found); //4
+
+//findIndexメソッド　条件に合う最初のインデックス(番号)を１つだけ取り出す
+//Reactでの用途：配列の中の特定のデータを書き換える時使う(一つのデータが何番目か探す)
+const arr_findIndex = [1,2,3,4,5];
+const foundIndex = arr_findIndex.findIndex(value => value > 3);
+console.log(foundIndex); //3
+
+//filterメソッド　条件に合うものを全て集めて、新しい配列を作る
+//Reactでの用途：削除や絞り込みをする
+//削除：「削除ボタンが押されたID以外」をfilterで残せば、削除機能
+//検索：検索欄に入力した文字が含まれるデータのみfiterで抽出して表示
+const arr_filter = [1,2,3,4,5]
+const filterd = arr_filter.filter(value => value > 3);
+console.log(filterd); //[4,5]
