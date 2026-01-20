@@ -118,6 +118,43 @@ console.log(c); // [1, 2, 3, 4]
 const items = [1,2,3,4,5];
 
 for(let i = 0;i < items.length;i++){
-    console.log(items[i]); //配列の各要素を順番に出力
+    console.log(items[i]); //配列の各要素を順番に出力　要素に順番にアクセスする
 }
 //1/19終了
+
+//1/20 開始
+//for...ofループ　インデックスなしで直接的に要素を取る
+const items2 = [1,2,3,4,5];
+items2.forEach((value,index,array)=> {
+    console.log(value); //各要素を順番に出力
+});
+
+//forEachメソッド
+const items3 = [1,2,3,4,5];
+items3.forEach((value, index, array) => {
+    console.log(index); //配列の各要素の順番を出力
+    console.log(value); //配列の各要素を順番に出力
+});
+//value:データそのもの　index:部屋番号（0から始まる）　array: 元の配列全体
+
+//map,filter,reduceメソッド
+const items4 = [1,2,3,4,5];
+
+const doubled = items4.map(value => value*2);
+console.log(doubled); //[2,4,6,8,10]
+//mapメソッドは、配列の全要素を加工して新しい配列を作る　
+//value => value*2は入った数字を2倍にして返すという意味
+//boubled:2倍の（mapメソッドで、元の数字をすべて2倍にした結果を入れる）
+
+const even = items4.filter(value => value % 2 === 0);
+console.log(even); //[2,4]
+//filterメソッドは条件に合う要素だけを残し、新しい配列を作る　濾過の意味
+//value % 2 === 0 は、「2で割った余りが完全に0かどうか」とチェックする
+//even:偶数（奇数はodd) 
+//filterメソッドで、偶数だけを抜き出した結果を入れる
+
+const sum = items.reduce((accumulator,value) => accumulator + value,0);
+console.log(sum); //15
+//全員を合わせて一つにする（まとめるという意味）
+//accumulator: 合計を入れる箱
+
