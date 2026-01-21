@@ -1,57 +1,21 @@
-import { createContext, useContext, useState } from "react";
+import "./App.css";
+import DenomTable from "./components/DenomTable";
 
-// 1. データの「箱」を作る
-const ThemeContext = createContext();
+const denomRows = [
+  { denom: "10,000", count: "12", subtotal: "¥120,000" },
+  { denom: "5,000", count: "8", subtotal: "¥40,000" },
+  { denom: "1,000", count: "52", subtotal: "¥52,000" },
+  { denom: "500", count: "48", subtotal: "¥24,000" },
+  { denom: "100", count: "260", subtotal: "¥26,000" },
+  { denom: "50", count: "80", subtotal: "¥4,000" },
+];
 
-export default function App() {
-  // テーマの状態（light または dark）
-  const [theme, setTheme] = useState("light");
-
-  // テーマを切り替える関数
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
-  };
-
-  const containerStyle = {
-    backgroundColor: theme === "light" ? "#ffffff" : "#222222",
-    color: theme === "light" ? "#000000" : "#ffffff",
-    height: "100vh",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    transition: "all 0.3s" // じわっと色が変わる
-  };
-
+function App() {
   return (
-    // 2. Providerで包んで、themeと関数を「バケツ」に入れる
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div style={containerStyle}>
-        <h1>Vite + React + useContext</h1>
-        <Card />
-      </div>
-    </ThemeContext.Provider>
-  );
-}
-
-// 子コンポーネント（Propsで何も受け取っていないことに注目！）
-function Card() {
-  return (
-    <div style={{ border: "1px solid gray", padding: "20px", borderRadius: "8px" }}>
-      <p>ここは子コンポーネントの中です</p>
-      <ThemeButton />
+    <div className="app">
+      <DenomTable rows={denomRows} />
     </div>
   );
 }
 
-// 孫コンポーネント（ここでデータを取り出す）
-function ThemeButton() {
-  // 3. useContextを使って、一番上のAppからデータを取り出す
-  const { theme, toggleTheme } = useContext(ThemeContext);
-
-  return (
-    <button onClick={toggleTheme} style={{ cursor: "pointer", padding: "10px 20px" }}>
-      {theme === "light" ? "ダークモードへ" : "ライトモードへ"}
-    </button>
-  );
-}
+export default App;

@@ -37,6 +37,46 @@
   padding: 2em;
 }
 
+.denom-card {
+  margin-top: 2rem;
+  text-align: left;
+  width: min(520px, 90vw);
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.denom-title {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+}
+
+.denom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.denom-table th,
+.denom-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.denom-table th {
+  text-align: left;
+  font-weight: 600;
+}
+
+.denom-table td:nth-child(2),
+.denom-table td:nth-child(3) {
+  text-align: right;
+}
+
+.denom-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
 .read-the-docs {
   color: #888;
 }
