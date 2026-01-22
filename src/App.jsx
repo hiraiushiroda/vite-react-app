@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./App.css";
 import DenomTable from "./components/DenomTable";
 import EventTable from "./components/EventTable";
-
 const denomRows = [
   { denom: "10,000", count: "12" },
   { denom: "5,000", count: "8" },
