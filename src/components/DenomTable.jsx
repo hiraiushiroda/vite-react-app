@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function DenomTable({ rows, expectedActualTotal }) {
   const parseDenom = (value) => {
@@ -27,25 +27,6 @@ export default function DenomTable({ rows, expectedActualTotal }) {
   );
   const [backupCounts, setBackupCounts] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const query = window.matchMedia("(max-width: 480px)");
-    const update = () => setIsMobile(query.matches);
-    update();
-    if (query.addEventListener) {
-      query.addEventListener("change", update);
-    } else {
-      query.addListener(update);
-    }
-    return () => {
-      if (query.removeEventListener) {
-        query.removeEventListener("change", update);
-      } else {
-        query.removeListener(update);
-      }
-    };
-  }, []);
   const total = rows.reduce((sum, row) => {
     const denom = parseDenom(row.denom);
     const count = Number(counts[row.denom]) || 0;
@@ -153,7 +134,7 @@ export default function DenomTable({ rows, expectedActualTotal }) {
   };
 
   return (
-    <div className="card denom-card">
+    <div className="card denom-card denom-card--wide">
       <h2 className="denom-title">金種内訳</h2>
 
       <section className="denom-group">
@@ -190,8 +171,7 @@ export default function DenomTable({ rows, expectedActualTotal }) {
 
       <section className="denom-group">
         <h3 className="denom-group-title">内訳</h3>
-        {isMobile ? (
-          <div className="denom-mobile">
+        <div className="denom-mobile denom-layout-mobile">
             <div className="denom-row denom-row--header">
               <span className="denom-row-denom">金種</span>
               <span className="denom-row-count">枚数</span>
@@ -213,11 +193,20 @@ export default function DenomTable({ rows, expectedActualTotal }) {
                 <span className="denom-summary-amount">{formatYen(coinTotal)}</span>
               </span>
             </div>
-          </div>
-        ) : (
-          <div className="denom-table-wrap">
-            <table className="denom-table">
+        </div>
+        <div className="denom-table-wrap denom-layout-desktop">
+          <div className="denom-table-grid">
+            <div className="denom-table-column">
+              <table className="denom-table denom-table--desktop">
+              <colgroup>
+                <col className="denom-col-denom" />
+                <col className="denom-col-count" />
+                <col className="denom-col-subtotal" />
+              </colgroup>
               <thead>
+                <tr>
+                  <th colSpan="3">札</th>
+                </tr>
                 <tr>
                   <th>金種</th>
                   <th>枚数</th>
@@ -225,32 +214,44 @@ export default function DenomTable({ rows, expectedActualTotal }) {
                 </tr>
               </thead>
               <tbody>
-                {billRows.length > 0 && (
-                  <tr className="denom-section">
-                    <td colSpan="3">札</td>
-                  </tr>
-                )}
                 {billRows.map((row) => renderRow(row, "bill"))}
-                {coinRows.length > 0 && (
-                  <tr className="denom-section">
-                    <td colSpan="3">硬貨</td>
-                  </tr>
-                )}
-                {coinRows.map((row) => renderRow(row, "coin"))}
-                <tr className="denom-group-total">
-                  <td>札合計</td>
-                  <td></td>
-                  <td>{formatYen(billTotal)}</td>
-                </tr>
-                <tr className="denom-group-total">
-                  <td>硬貨合計</td>
-                  <td></td>
-                  <td>{formatYen(coinTotal)}</td>
-                </tr>
               </tbody>
             </table>
+              <div className="denom-table-total denom-group-total">
+                <span>札合計</span>
+                <span></span>
+                <span>{formatYen(billTotal)}</span>
+              </div>
+            </div>
+            <div className="denom-table-column">
+              <table className="denom-table denom-table--desktop">
+              <colgroup>
+                <col className="denom-col-denom" />
+                <col className="denom-col-count" />
+                <col className="denom-col-subtotal" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colSpan="3">硬貨</th>
+                </tr>
+                <tr>
+                  <th>金種</th>
+                  <th>枚数</th>
+                  <th>小計</th>
+                </tr>
+              </thead>
+              <tbody>
+                {coinRows.map((row) => renderRow(row, "coin"))}
+              </tbody>
+            </table>
+              <div className="denom-table-total denom-group-total">
+                <span>硬貨合計</span>
+                <span></span>
+                <span>{formatYen(coinTotal)}</span>
+              </div>
+            </div>
           </div>
-        )}
+        </div>
       </section>
 
       <div className="denom-divider" />

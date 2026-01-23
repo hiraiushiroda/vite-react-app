@@ -91,20 +91,22 @@ function App() {
           ))}
         </div>
         <section className="page-content">
-          {activeTab === "イベント一覧" ? (
-            <EventTable />
-          ) : activeTab === "タイムライン" ? (
-            <div>
-              <h2>タイムライン（仮）</h2>
-              <p>ここに証跡ビューを置く想定です。</p>
-              <DenomTable rows={denomRows} expectedActualTotal={expectedActualTotal} />
-            </div>
-          ) : (
-            <div className="placeholder">
-              <h2>{activeTab}</h2>
-              <p>このタブの内容はプレースホルダです。</p>
-            </div>
-          )}
+          <div className="page-container">
+            {activeTab === "イベント一覧" ? (
+              <EventTable />
+            ) : activeTab === "タイムライン" ? (
+              <div>
+                <h2>タイムライン（仮）</h2>
+                <p>ここに証跡ビューを置く想定です。</p>
+                <DenomTable rows={denomRows} expectedActualTotal={expectedActualTotal} />
+              </div>
+            ) : (
+              <div className="placeholder">
+                <h2>{activeTab}</h2>
+                <p>このタブの内容はプレースホルダです。</p>
+              </div>
+            )}
+          </div>
         </section>
       </main>
     </div>
