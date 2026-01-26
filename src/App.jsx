@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import DenomTable from "./components/DenomTable";
 import EventTable from "./components/EventTable";
+import SnapshotTable from "./components/SnapshotTable";
 const denomRows = [
   { denom: "10,000", count: "12" },
   { denom: "5,000", count: "8" },
@@ -94,6 +95,8 @@ function App() {
           <div className="page-container">
             {activeTab === "イベント一覧" ? (
               <EventTable />
+            ) : activeTab === "スナップショット" ? (
+              <SnapshotTable />
             ) : activeTab === "タイムライン" ? (
               <div>
                 <h2>タイムライン（仮）</h2>
