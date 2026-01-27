@@ -1,22 +1,8 @@
 import { useState } from "react";
 import "./App.css";
-import DenomTable from "./components/DenomTable";
 import EventTable from "./components/EventTable";
 import SnapshotTable from "./components/SnapshotTable";
-const denomRows = [
-  { denom: "10,000", count: "12" },
-  { denom: "5,000", count: "8" },
-  { denom: "2,000", count: "4" },
-  { denom: "1,000", count: "52" },
-  { denom: "500", count: "48" },
-  { denom: "100", count: "260" },
-  { denom: "50", count: "80" },
-  { denom: "10", count: "120" },
-  { denom: "5", count: "60" },
-  { denom: "1", count: "200" },
-];
-
-const expectedActualTotal = 260000;
+import TimelineView from "./components/TimelineView";
 function App() {
   const isAdmin = true;
   const tabs = [
@@ -98,11 +84,7 @@ function App() {
             ) : activeTab === "スナップショット" ? (
               <SnapshotTable />
             ) : activeTab === "タイムライン" ? (
-              <div>
-                <h2>タイムライン（仮）</h2>
-                <p>ここに証跡ビューを置く想定です。</p>
-                <DenomTable rows={denomRows} expectedActualTotal={expectedActualTotal} />
-              </div>
+              <TimelineView />
             ) : (
               <div className="placeholder">
                 <h2>{activeTab}</h2>
